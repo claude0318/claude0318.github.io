@@ -164,7 +164,7 @@ the P-step where the branches of the network predicting candidate poses and thei
 
 ## Evaluation
 <div  align="center">    
-	<img src="[图片链接](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)" width = 400 />
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613" width = 400 />
 </div>
 
 
