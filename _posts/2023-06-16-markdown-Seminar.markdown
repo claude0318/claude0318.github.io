@@ -14,7 +14,7 @@ author: Zihao Cao
 description: Introduction of the first unsupervised SVR method in the world
 ---
 
-## Background
+## 1.Background
 
 It's quite amazing that human eyes and brains can work together and directly understand the 3D structure of the objects that we see in 2D images. However, it's a hard task for the computer to do so ———— reconstructuring the object from single view. 
 
@@ -32,8 +32,8 @@ In this paper, the authors present UNICORN, a framework leveraging UNsupervised 
 
 
 
-## Related works
-### Mesh-based differentiable rendering
+## 2.Related works
+### 2.1.Mesh-based differentiable rendering
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f541f889-ec22-4f18-b6f2-3fbd8aa3e8b5)
 
 
@@ -41,7 +41,7 @@ The authors represent 3D models as meshes with parametrized surfaces, as introdu
 Loper and Black[2] introduce the first generic differentiable renderer by approximating derivatives with local filters, and Kato[3] proposes an alternative approximation more suitable to learning neural networks.
 Another set of methods instead approximates the rendering function to allow differentiability, including SoftRasterizer[4].
 
-### Cross-instance consistency
+### 2.2.Cross-instance consistency
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/1962cacf-562e-44ab-8889-dc349810498f)
 
 Inspired by [5], the SVR system of [6] is learned by enforcing consistency between the interpolated 3D attributes of two instances and attributes predicted for the associated reconstruction. 
@@ -50,7 +50,7 @@ Closer to this paper’s approach, [7] introduces a loss enforcing cross-silhoue
 (i) the loss operates on silhouettes, whereas our loss is adapted to image reconstruction by modeling background and separating two terms related to shape and texture, 
 (ii) the loss is used as a refinement on top of two cycle consistency losses for poses and 3D reconstructions, whereas we demonstrate results without additional self-supervised losses.
 
-### Curriculum learning
+### 2.3.Curriculum learning
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/d021fb8c-1172-45f8-9228-5889478046e7)
 
@@ -64,8 +64,8 @@ Known to drastically improve the convergence speed, curriculum sampling is widel
 
 
 
-## Model
-### Overview
+## 3.Model
+### 3.1.Overview
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/bb71524f-9e91-4c03-92ba-9e8048f844ed)
 
 The approach can be seen as a structured autoencoder: it takes an image as input, computes parameters with an encoder, and decodes them into explicit and interpretable factors that are composed to generate an image.
@@ -74,14 +74,14 @@ The image I is fed to convolutional encoder networks eθ which output parameters
 
 
 
-### 1.Shape deformation
+### 3.2.Shape deformation
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f7aa2641-1235-43ab-a934-f33ffc245ba4)
 
 The authors follow [9] and use the parametrization of AtlasNet [1] where different shapes are represented as deformation fields applied to the unit sphere. 
 They apply the deformation to an icosphere slightly stretched into an ellipsoid mesh E using a fixed anisotropic scaling. Because they found that using an ellipsoid instead of a raw icosphere could be very effective in encouraging the learning of objects aligned w.r.t. the canonical axes
 
-### 2.Texturing
+### 3.3.Texturing
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ea20c50a-b301-4017-9eeb-e8200b98f894)
 
@@ -89,35 +89,35 @@ Following the idea of CMR [10], the authors model textures as an image UV-mapped
 
 They provide a texture code ztx, a convolutional network tθ is used to produce an image tθ(ztx), which is UV-mapped onto the sphere using spherical coordinates to associate a 2D point to every vertex of the ellipsoid, and thus to each vertex of the shaped mesh.
 
-### 3.Affine transformation
+### 3.4.Affine transformation
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7ccdaee3-2a99-4553-b820-8a213ed2a612)
 
 The authors found it beneficial to explicitly model an anisotropic scaling of the objects. They predict K poses candidates, defined by rotations r1:K and translations t1:K, and associated probabilities p1:K.  Then they select the pose with highest probability, combine the scaling and the most likely 6D pose in a single affine transformation module 
 
 
-### 4.Rendering with background
+### 3.5.Rendering with background
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/413256d7-eafd-4d6e-9b03-89ea02dc1139)
 
 The final step of the process is to render the mesh over a background image. The background image bθ(zbg) is generated from a background code zbg by a convolutional network bθ.
 
 
-## Learning Methods
+## 4.Learning Methods
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/0db2c3d4-46e1-4f4b-8028-ff8698d378e4)
 
 The authors propose to learn the structured autoencoder without any supervision, by synthesizing 2D images and minimizing a reconstruction loss. Due to the unconstrained nature of the problem, such an approach typically yields degenerate solution. While previous works leverage silhouettes and dataset-specific priors to mitigate this issue, the authors instead propose two unsupervised data-driven techniques, namely progressive conditioning (a training strategy) and neighbor reconstruction (a training loss).
 
 
-### Progressive conditioning
+### 4.1.Progressive conditioning
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/d9a96e9a-ea39-496b-a885-24d393329501)
 
 The goal of progressive conditioning is to encourage the model to share elements (e.g., shape, texture, background) across instances to prevent degenerate solutions.They implement progressive conditioning by masking, stage-by-stage, a decreasing number of values of the latent code. All the experiments share the same 4-stage training strategy where the latent code dimension is increased at the beginning of each stage and the network is then trained until convergence.
 
 
-### Alternate 3D and pose learning
+### 4.2.Alternate 3D and pose learning
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/a42d3fe8-1ece-4de5-b05d-9432c3914295)
 <div align="center">
@@ -140,16 +140,15 @@ It means, (i)3D receives gradients from the most likely reconstruction, and (ii)
 
 
 
-### Training Loss
-#### 3D step
+### 4.3.Training Loss
+#### 4.3.1.3D step
 
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/826b9d69-5506-47f2-b874-352f73b1da66" />
 </div>
 
-
-the 3D-step where shape, texture and background branches of the network are updated by minimizing L3D using the pose associated to the highest probability
-##### Neighbor reconstruction
+The 3D-step where shape, texture and background branches of the network are updated by minimizing L3D using the pose associated to the highest probability
+##### 4.3.1.1.Neighbor reconstruction
 
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/763f745d-9103-4d02-8a05-2c6d8a2298e0)
@@ -161,7 +160,7 @@ the 3D-step where shape, texture and background branches of the network are upda
 The idea behind neighbor reconstruction is to explicitly enforce consistency between different instances. The key assumption is that neighboring instances with similar shape or texture exist in the dataset. If such neighbors are correctly identified, switching their shape or texture in the generation model should give similar reconstruction results. Intuitively, this process can be seen as mimicking a multi-view supervision without actually having access to multi-view images by finding neighboring instances in well-designed latent spaces.
 
 
-##### Reconstruction losses
+##### 4.3.1.2.Reconstruction losses
 
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/c2c50241-14a2-45c6-9ab4-351be1f61bf9" />
@@ -170,7 +169,7 @@ The idea behind neighbor reconstruction is to explicitly enforce consistency bet
 
 The reconstruction loss has two terms, a pixel-wise squared L2 loss and a perceptual loss. While pixel-wise losses are common for autoencoders, the author found it crucial to add a perceptual loss to learn textures that are discriminative for the pose estimation. 
 
-##### regularization losses
+##### 4.3.1.3.regularization losses
 
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/25ca8d5f-5419-4b32-aaac-7473801c7915" />
@@ -180,7 +179,7 @@ The reconstruction loss has two terms, a pixel-wise squared L2 loss and a percep
 While the deformation-based surface parametrization naturally regularizes the shape, the authors sometimes observe bad minima where the surface has folds, that's why they added a small regularization term at the end.
 
 
-#### P step
+#### 4.3.2.step
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/b1de74b5-9f2a-4d66-8c50-f172a715fed0" />
 </div>
@@ -188,7 +187,7 @@ While the deformation-based surface parametrization naturally regularizes the sh
 The P-step where the branches of the network predicting candidate poses and their associated probabilities are updated by minimizing:
 
 
-## Evaluation
+## 5.Evaluation
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613" width = 400 />
 </div>
@@ -216,7 +215,7 @@ On Pascal3D+ Car, they achieve significantly better results than UCMR for Chamfe
 The authors also analyze the influence of their neighbor reconstruction loss and progressive conditioning (PC) by running experiments without each component.When neighbor reconstruction loss is removed, they observe that the reconstruction seen from the predicted viewpoint is correct but it is either wrong for chairs and degraded for cars when seen from the other viewpoint. Indeed, the neighbor reconstruction explicitly enforces the unseen reconstructed parts to be consistent with other instances. When PC is removed, they observe degenerate reconstructions where the object seen from a different viewpoint is not realistic.
 
 
-## My run
+## 6.My run
 
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/d3bffc9a-a050-41ea-ab97-f7f69911f953"  />
@@ -235,7 +234,7 @@ It's a picture that I took in front of the building of TUM in downtown.
 As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
 
 ---
-### Results
+### 7.Results
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/a8cf37dd-25b1-4c7e-a975-159a9942c667"  />
 </div>
