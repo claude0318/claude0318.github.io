@@ -24,9 +24,7 @@ Recent advancements in deep learning methods have dramatically improved results 
 
 
 
-Then it comes to the thinking: is there an unsupervised learning method for SVR? 
-
-Before this paper, the answer was no. 
+Then it comes to the thinking: is there an unsupervised learning method for SVR? The answer was no unitl this paper came out.
 
 In this paper, the authors present UNICORN, a framework leveraging UNsupervised cross-Instance COnsistency for 3D ReconstructioN. It is the most unsupervised approach to single-view reconstruction and their main contributions are: 1) the most unsupervised SVR system; 2) two data-driven techniques to enforce cross-instance consistency
 
@@ -79,7 +77,6 @@ The image I is fed to convolutional encoder networks eθ which output parameters
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f7aa2641-1235-43ab-a934-f33ffc245ba4)
 
 The authors follow [9] and use the parametrization of AtlasNet [1] where different shapes are represented as deformation fields applied to the unit sphere. 
-
 They apply the deformation to an icosphere slightly stretched into an ellipsoid mesh E using a fixed anisotropic scaling. Because they found that using an ellipsoid instead of a raw icosphere could be very effective in encouraging the learning of objects aligned w.r.t. the canonical axes
 
 ### 2.Texturing
@@ -118,7 +115,7 @@ The goal of progressive conditioning is to encourage the model to share elements
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/a42d3fe8-1ece-4de5-b05d-9432c3914295)
 <div align="center">
-### Previous Method
+Previous Method
 </div>
 In previous works, all reconstructions associated to the different pose candidates are computed and both 3D and poses are updated using the reconstruction yielding
 the minimal error, there are two major issues. First, because the other poses are not updated for a given input, we observed that a typical
@@ -129,7 +126,7 @@ And in other methods, 3D and poses are updated using an expected reconstruction 
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/16eac6d9-d073-49e1-82eb-ee075d9500dd)
 <div align="center">
-### Author's Method
+Author's Method
 </div>
 Compared to prior works, the authors propose an optimization that alternates between 2 steps. (a) They update the 3D using the most likely pose candidate (3D-step). (b) They update the pose candidates and associated probabilities using the expected loss (P-step). 
 It means, (i)3D receives gradients from the most likely reconstruction, and (ii) all poses are updated using an expected loss
@@ -166,20 +163,42 @@ the P-step where the branches of the network predicting candidate poses and thei
 
 
 ## Evaluation
+<div  align="center">    
+	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)
+</div>
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)
+The approach achieves results that are on average better than the state-of-the-art methods supervised with silhouette and viewpoint annotations. This is a strong result: while silhouettes are trivial in this benchmark, learning without viewpoint annotations is extremely challenging
+as it involves solving the pose estimation and shape reconstruction problems simultaneously.
+However, note that for the lamp category, the method predicts degenerate 3D shapes; the authors hypothesize this is due to their rotation invariance which makes the viewpoint estimation ambiguous.
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/4de39b37-1917-4794-8795-2da112bb7cf3)
+<div  align="center">    
+	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/4de39b37-1917-4794-8795-2da112bb7cf3)
+</div>
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/29ddde42-8547-4a80-9779-259e35096f71)
+On Pascal3D+ Car, they achieve significantly better results than UCMR for Chamfer-L1 and Mask IoU, which they argue are less biased metrics than the standard 3D IoU computed on unaligned shapes (see supplementary). However, on CUB, the approach achieves reasonable results that are however slightly worse than the state of the art. They hypothesize this is linked to the pose regularization term encouraging the use of all viewpoints whereas these bird images clearly lack back views.
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7f1189e0-e403-41bb-bd9b-e7dee39fe1ce)
+<div  align="center">    
+	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/29ddde42-8547-4a80-9779-259e35096f71)
+</div>
+<div  align="center">    
+	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7f1189e0-e403-41bb-bd9b-e7dee39fe1ce)
+</div>
+
+The authors also analyze the influence of their neighbor reconstruction loss and progressive conditioning (PC) by running experiments without each component.When neighbor reconstruction loss is removed, they observe that the reconstruction seen from the predicted viewpoint is correct but it is either wrong for chairs and degraded for cars when seen from the other viewpoint. Indeed, the neighbor reconstruction explicitly enforces the unseen reconstructed parts to be consistent with other instances. When PC is removed, they observe degenerate reconstructions where the object seen from a different viewpoint is not realistic.
 
 
 ## My run
+<div  align="center">    
+	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)
+</div>
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)
+<div  align="center">    
+	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/a4ed918c-905a-40de-a32a-12b7b26d249a)
+</div>
 
+As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
+
+![psc](https://github.com/claude0318/claude0318.github.io/assets/69024793/d7bcc758-6bbf-4fba-8676-cbabd7d964f7)
 
 
 ## Conclusions
