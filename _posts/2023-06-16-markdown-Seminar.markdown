@@ -116,7 +116,7 @@ The goal of progressive conditioning is to encourage the model to share elements
 ### Alternate 3D and pose learning
 
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)<figcaption class="caption">Previous Work</figcaption>
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
 
 
 
