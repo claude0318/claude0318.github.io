@@ -18,9 +18,9 @@ dark-theme: auto
 # and specify source (external or local).
 resume: false
 resume-external: false
-resume-url: https://google.com/?q=my+resume
+#resume-url: https://google.com/?q=my+resume
 
-url: https://claude0318.github.io/test02.github.io/
+url: https://claude0318.github.io/
 # your url: https://USERNAME.github.io
 
 permalink: /:title/
@@ -64,7 +64,7 @@ pagination:
   permalink: "/:num/" # pagination link that will be appended
 
 # if you don't need projects, comment the *projects* configs below
-projects: false
+#projects: false
 
 # if you don't need "about" or "blog", comment them out below
 about: true
