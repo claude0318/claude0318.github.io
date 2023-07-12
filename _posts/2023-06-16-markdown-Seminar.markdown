@@ -19,19 +19,55 @@ description: Introduction of the first unsupervised SVR method in the world
 It's quite amazing that human eyes and brains can work together and directly understand the 3D structure of the objects that we see in 2D images. However, it's a hard task for the computer to do so ———— reconstructuring the object from single view. 
 
 Recent advancements in deep learning methods have dramatically improved results in SVR(single view reconstruction), however, the best methods still require costly supervision at training time. Although crucial to achieve reasonable results, priors like silhouettes and symmetry can also harm the reconstruction quality: silhouette annotations are often coarse and small symmetry prediction errors can yield unrealistic reconstructions.
-#### 此处有图片
+
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/9ae48935-3c33-44e2-b73b-7fa92d0030da)
+
+
 
 Then it comes to the thinking: is there an unsupervised learning method for SVR? 
 
 Before this paper, the answer was no. 
 
 In this paper, the authors present UNICORN, a framework leveraging UNsupervised cross-Instance COnsistency for 3D ReconstructioN. It is the most unsupervised approach to single-view reconstruction and their main contributions are: 1) the most unsupervised SVR system; 2) two data-driven techniques to enforce cross-instance consistency
-#### 此处有图片
+
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/d3d56cb4-c25c-4345-831b-16eb0aaeb258)
+
 
 
 {% highlight html %}
 This note **demonstrates** some of what [Markdown][some/link] is *capable of doing*.
 {% endhighlight %}
+## Related works
+### Mesh-based differentiable rendering
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f541f889-ec22-4f18-b6f2-3fbd8aa3e8b5)
+
+
+The authors represent 3D models as meshes with parametrized surfaces, as introduced in AtlasNet[1]. They optimize the mesh geometry, texture and camera parameters associated to an image using differentiable rendering. 
+Loper and Black[2] introduce the first generic differentiable renderer by approximating derivatives with local filters, and Kato[3] proposes an alternative approximation more suitable to learning neural networks.
+Another set of methods instead approximates the rendering function to allow differentiability, including SoftRasterizer[4].
+
+### Cross-instance consistency
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/1962cacf-562e-44ab-8889-dc349810498f)
+
+Inspired by [5], the SVR system of [6] is learned by enforcing consistency between the interpolated 3D attributes of two instances and attributes predicted for the associated reconstruction. 
+
+Closer to this paper’s approach, [7] introduces a loss enforcing cross-silhouette consistency. Yet it differs from this paper in two ways:
+(i) the loss operates on silhouettes, whereas our loss is adapted to image reconstruction by modeling background and separating two terms related to shape and texture, 
+(ii) the loss is used as a refinement on top of two cycle consistency losses for poses and 3D reconstructions, whereas we demonstrate results without additional self-supervised losses.
+
+### Curriculum learning
+
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/d021fb8c-1172-45f8-9228-5889478046e7)
+
+We, humanbeings, always start from simple incrementally to complex problem when we try to learn something. It also makes sense for the Machine Learning.
+The idea of learning networks by “starting small” dates back to Elman [8] where two curriculum learning schemes are studied: 
+(i) increasing the difficulty of samples, 
+(ii) increasing the model complexity.
+The authors call them curriculum sampling and curriculum modeling. 
+
+Known to drastically improve the convergence speed, curriculum sampling is widely adopted across various applications. On the contrary, curriculum modeling is typically less studied although crucial to various methods.We propose a new form of curriculum modeling dubbed progressive conditioning which enables us to avoid bad minima
+
+
 
 ## Model
 ### Overview
@@ -66,7 +102,7 @@ The authors propose to learn the structured autoencoder without any supervision,
 
 
 ### Progressive conditioning
-We, humanbeings, always start from simple incrementally to complex problem when we try to learn something. It also makes sense for the Machine Learning.
+
 
 The goal of progressive conditioning is to encourage the model to share elements (e.g., shape, texture, background) across instances to prevent degenerate solutions.They implement progressive conditioning by masking, stage-by-stage, a decreasing number of values of the latent code. All the experiments share the same 4-stage training strategy where the latent code dimension is increased at the beginning of each stage and the network is then trained until convergence.
 
