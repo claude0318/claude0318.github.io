@@ -164,8 +164,9 @@ the P-step where the branches of the network predicting candidate poses and thei
 
 ## Evaluation
 <div  align="center">    
-	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)
+	<img src="[图片链接](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)" width = 400 />
 </div>
+
 
 The approach achieves results that are on average better than the state-of-the-art methods supervised with silhouette and viewpoint annotations. This is a strong result: while silhouettes are trivial in this benchmark, learning without viewpoint annotations is extremely challenging
 as it involves solving the pose estimation and shape reconstruction problems simultaneously.
