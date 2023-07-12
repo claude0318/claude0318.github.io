@@ -116,16 +116,23 @@ The goal of progressive conditioning is to encourage the model to share elements
 ### Alternate 3D and pose learning
 
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
-
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/a42d3fe8-1ece-4de5-b05d-9432c3914295)
 <div align="center">
-
-Previous Method
+### Previous Method
 </div>
+In previous works, all reconstructions associated to the different pose candidates are computed and both 3D and poses are updated using the reconstruction yielding
+the minimal error, there are two major issues. First, because the other poses are not updated for a given input, we observed that a typical
+failure case corresponds to a collapse mode where only a single pose (or a small subset of poses) is used for all inputs
+And in other methods, 3D and poses are updated using an expected reconstruction loss. Because the 3D receives gradients from all views, we observed a typical failure case where the 3D tries to fit the target input from all pose candidates yielding inaccurate texture and geometry.
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/19614a2c-e1aa-4722-8b3c-04f18726ad2a)
 
 
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/16eac6d9-d073-49e1-82eb-ee075d9500dd)
+<div align="center">
+### Author's Method
+</div>
+Compared to prior works, the authors propose an optimization that alternates between 2 steps. (a) They update the 3D using the most likely pose candidate (3D-step). (b) They update the pose candidates and associated probabilities using the expected loss (P-step). 
+It means, (i)3D receives gradients from the most likely reconstruction, and (ii) all poses are updated using an expected loss
 
 
 
@@ -137,18 +144,18 @@ the 3D-step where shape, texture and background branches of the network are upda
 ##### Neighbor reconstruction
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/763f745d-9103-4d02-8a05-2c6d8a2298e0)
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/af1f6f6d-218e-4501-9391-8750652ddd05)
-
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/79cfdca6-f2ad-4292-8648-1fca5b27adf9)
+The idea behind neighbor reconstruction is to explicitly enforce consistency between different instances. The key assumption is that neighboring instances with similar shape or texture exist in the dataset. If such neighbors are correctly identified, switching their shape or texture in the generation model should give similar reconstruction results. Intuitively, this process can be seen as mimicking a multi-view supervision without actually having access to multi-view images by finding neighboring instances in well-designed latent spaces.
 
 
 ##### Reconstruction losses
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/71193680-54af-4581-a02e-bfa66477fefd)
 
+The reconstruction loss has two terms, a pixel-wise squared L2 loss and a perceptual loss. While pixel-wise losses are common for autoencoders, the author found it crucial to add a perceptual loss to learn textures that are discriminative for the pose estimation. 
+
 ##### regularization losses
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/14a0f375-9f77-451d-beaf-5229701bdcec)
 
-
+While the deformation-based surface parametrization naturally regularizes the shape, the authors sometimes observe bad minima where the surface has folds, that's why they added a small regularization term at the end.
 
 
 #### P step
