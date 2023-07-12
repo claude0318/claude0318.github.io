@@ -16,7 +16,7 @@ description: Introduction of the first unsupervised SVR method in the world
 
 ## 1.Background
 
-It's quite amazing that human eyes and brains can work together and directly understand the 3D structure of the objects that we see in 2D images. However, it's a hard task for the computer to do so ———— reconstructuring the object from single view. 
+It's quite amazing that human eyes and brains can work together and directly understand the 3D structure of the objects that we see in 2D images. However, it's a hard task for the computer to do so —— reconstructuring the object from a single view. 
 
 Recent advancements in deep learning methods have dramatically improved results in SVR(single view reconstruction), however, the best methods still require costly supervision at training time. Although crucial to achieve reasonable results, priors like silhouettes and symmetry can also harm the reconstruction quality: silhouette annotations are often coarse and small symmetry prediction errors can yield unrealistic reconstructions.
 
