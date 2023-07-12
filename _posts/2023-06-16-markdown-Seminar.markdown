@@ -129,7 +129,7 @@ the P-step where the branches of the network predicting candidate poses and thei
 
 Reference:
 
-1] Groueix, T., Fisher, M., Kim, V.G., Russell, B.C., Aubry, M.: AtlasNet: A Papier Mˆach´e Approach to Learning 3D Surface Generation. In: CVPR (2018) 2, 4, 6, 24
+[1] Groueix, T., Fisher, M., Kim, V.G., Russell, B.C., Aubry, M.: AtlasNet: A Papier Mˆach´e Approach to Learning 3D Surface Generation. In: CVPR (2018) 2, 4, 6, 24
 [2] Loper, M.M., Black, M.J.: OpenDR: An Approximate Differentiable Renderer. In: ECCV 2014, vol. 8695 (2014) 4
 [3] Kato, H., Ushiku, Y., Harada, T.: Neural 3D Mesh Renderer. In: CVPR (2018) 2, 4, 10
 [4] Liu, S., Li, T., Chen, W., Li, H.: Soft Rasterizer: A Differentiable Renderer for Image-based 3D Reasoning. In: ICCV (2019) 2, 3, 4, 5, 7, 8, 10, 11, 18, 23, 25 
