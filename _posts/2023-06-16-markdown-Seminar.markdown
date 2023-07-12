@@ -196,6 +196,9 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/d3bffc9a-a050-41ea-ab97-f7f69911f953"  />
 </div>
 
+<div align="center">
+Input Picture
+</div>
 
 It's a picture that I took in front of the building of TUM in downtown. 
 
@@ -203,17 +206,24 @@ It's a picture that I took in front of the building of TUM in downtown.
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/a4ed918c-905a-40de-a32a-12b7b26d249a"  />
 </div>
 
-
 As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
 
 ---
+### Results
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/a8cf37dd-25b1-4c7e-a975-159a9942c667"  />
+</div>
 
 
-![re01](https://github.com/claude0318/claude0318.github.io/assets/69024793/a8cf37dd-25b1-4c7e-a975-159a9942c667)
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/0c1841bd-9a80-4d8b-a65b-bbdfc168531e"  />
+</div>
 
-![re05](https://github.com/claude0318/claude0318.github.io/assets/69024793/0c1841bd-9a80-4d8b-a65b-bbdfc168531e)
 
-![psc](https://github.com/claude0318/claude0318.github.io/assets/69024793/d7bcc758-6bbf-4fba-8676-cbabd7d964f7)
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/d7bcc758-6bbf-4fba-8676-cbabd7d964f7"  />
+</div>
+
 
 Although the final result could not tell that the reconstruction of our input is a porsche, we could still easily find that it's quite different from the SUV. Considering that the input image only has the back side of a vehicle, the result is good enough.
 
