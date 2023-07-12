@@ -206,10 +206,15 @@ It's a picture that I took in front of the building of TUM in downtown.
 
 As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
 
+---
+
 
 ![re01](https://github.com/claude0318/claude0318.github.io/assets/69024793/a8cf37dd-25b1-4c7e-a975-159a9942c667)
+
 ![re05](https://github.com/claude0318/claude0318.github.io/assets/69024793/0c1841bd-9a80-4d8b-a65b-bbdfc168531e)
+
 ![psc](https://github.com/claude0318/claude0318.github.io/assets/69024793/d7bcc758-6bbf-4fba-8676-cbabd7d964f7)
+
 Although the final result could not tell that the reconstruction of our input is a porsche, we could still easily find that it's quite different from the SUV. Considering that the input image only has the back side of a vehicle, the result is good enough.
 
 ## Conclusions
