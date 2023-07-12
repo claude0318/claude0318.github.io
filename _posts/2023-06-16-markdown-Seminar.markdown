@@ -66,20 +66,23 @@ Known to drastically improve the convergence speed, curriculum sampling is widel
 
 ## Model
 ### Overview
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/bb71524f-9e91-4c03-92ba-9e8048f844ed)
 
 The approach can be seen as a structured autoencoder: it takes an image as input, computes parameters with an encoder, and decodes them into explicit and interpretable factors that are composed to generate an image.
 
 The image I is fed to convolutional encoder networks eθ which output parameters eθ(I) = {zsh, ztx, a, zbg} used for the decoding part. In the following, we describe the decoding modules using these parameters to build the final image by generating a shape, adding texture, positioning it and rendering it over a background.
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/bb71524f-9e91-4c03-92ba-9e8048f844ed)
+
 
 ### 1.Shape deformation
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f7aa2641-1235-43ab-a934-f33ffc245ba4)
 
 The authors follow [9] and use the parametrization of AtlasNet [1] where different shapes are represented as deformation fields applied to the unit sphere. 
 They apply the deformation to an icosphere slightly stretched into an ellipsoid mesh E using a fixed anisotropic scaling. Because they found that using an ellipsoid instead of a raw icosphere could be very effective in encouraging the learning of objects aligned w.r.t. the canonical axes
 
 ### 2.Texturing
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ea20c50a-b301-4017-9eeb-e8200b98f894)
 
 Following the idea of CMR [10], the authors model textures as an image UV-mapped onto the mesh through the reference ellipsoid. 
@@ -87,18 +90,21 @@ Following the idea of CMR [10], the authors model textures as an image UV-mapped
 They provide a texture code ztx, a convolutional network tθ is used to produce an image tθ(ztx), which is UV-mapped onto the sphere using spherical coordinates to associate a 2D point to every vertex of the ellipsoid, and thus to each vertex of the shaped mesh.
 
 ### 3.Affine transformation
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7ccdaee3-2a99-4553-b820-8a213ed2a612)
 
 The authors found it beneficial to explicitly model an anisotropic scaling of the objects. They predict K poses candidates, defined by rotations r1:K and translations t1:K, and associated probabilities p1:K.  Then they select the pose with highest probability, combine the scaling and the most likely 6D pose in a single affine transformation module 
 
 
 ### 4.Rendering with background
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/413256d7-eafd-4d6e-9b03-89ea02dc1139)
 
 The final step of the process is to render the mesh over a background image. The background image bθ(zbg) is generated from a background code zbg by a convolutional network bθ.
 
 
 ## Learning Methods
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/0db2c3d4-46e1-4f4b-8028-ff8698d378e4)
 
 The authors propose to learn the structured autoencoder without any supervision, by synthesizing 2D images and minimizing a reconstruction loss. Due to the unconstrained nature of the problem, such an approach typically yields degenerate solution. While previous works leverage silhouettes and dataset-specific priors to mitigate this issue, the authors instead propose two unsupervised data-driven techniques, namely progressive conditioning (a training strategy) and neighbor reconstruction (a training loss).
@@ -110,8 +116,8 @@ The authors propose to learn the structured autoencoder without any supervision,
 
 The goal of progressive conditioning is to encourage the model to share elements (e.g., shape, texture, background) across instances to prevent degenerate solutions.They implement progressive conditioning by masking, stage-by-stage, a decreasing number of values of the latent code. All the experiments share the same 4-stage training strategy where the latent code dimension is increased at the beginning of each stage and the network is then trained until convergence.
 
-### Alternate 3D and pose learning
 
+### Alternate 3D and pose learning
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/a42d3fe8-1ece-4de5-b05d-9432c3914295)
 <div align="center">
@@ -128,6 +134,7 @@ And in other methods, 3D and poses are updated using an expected reconstruction 
 <div align="center">
 Author's Method
 </div>
+
 Compared to prior works, the authors propose an optimization that alternates between 2 steps. (a) They update the 3D using the most likely pose candidate (3D-step). (b) They update the pose candidates and associated probabilities using the expected loss (P-step). 
 It means, (i)3D receives gradients from the most likely reconstruction, and (ii) all poses are updated using an expected loss
 
@@ -135,31 +142,50 @@ It means, (i)3D receives gradients from the most likely reconstruction, and (ii)
 
 ### Training Loss
 #### 3D step
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f1e8bd1c-c7f4-4b72-9f51-9c3597e0c559)
+
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/826b9d69-5506-47f2-b874-352f73b1da66" />
+</div>
+
 
 the 3D-step where shape, texture and background branches of the network are updated by minimizing L3D using the pose associated to the highest probability
 ##### Neighbor reconstruction
+
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/763f745d-9103-4d02-8a05-2c6d8a2298e0)
+
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/bdfad3d8-a383-45b1-9167-f849b2738ce4" />
+</div>
 
 The idea behind neighbor reconstruction is to explicitly enforce consistency between different instances. The key assumption is that neighboring instances with similar shape or texture exist in the dataset. If such neighbors are correctly identified, switching their shape or texture in the generation model should give similar reconstruction results. Intuitively, this process can be seen as mimicking a multi-view supervision without actually having access to multi-view images by finding neighboring instances in well-designed latent spaces.
 
 
 ##### Reconstruction losses
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/71193680-54af-4581-a02e-bfa66477fefd)
+
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/c2c50241-14a2-45c6-9ab4-351be1f61bf9" />
+</div>
+
 
 The reconstruction loss has two terms, a pixel-wise squared L2 loss and a perceptual loss. While pixel-wise losses are common for autoencoders, the author found it crucial to add a perceptual loss to learn textures that are discriminative for the pose estimation. 
 
 ##### regularization losses
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/14a0f375-9f77-451d-beaf-5229701bdcec)
+
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/25ca8d5f-5419-4b32-aaac-7473801c7915" />
+</div>
+
 
 While the deformation-based surface parametrization naturally regularizes the shape, the authors sometimes observe bad minima where the surface has folds, that's why they added a small regularization term at the end.
 
 
 #### P step
+<div  align="center">    
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/b1de74b5-9f2a-4d66-8c50-f172a715fed0" />
+</div>
 
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ab52a57a-c74f-46b3-a154-5762850d4e8d)
-
-the P-step where the branches of the network predicting candidate poses and their associated probabilities are updated by minimizing:
+The P-step where the branches of the network predicting candidate poses and their associated probabilities are updated by minimizing:
 
 
 ## Evaluation
