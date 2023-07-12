@@ -189,7 +189,7 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 
 ## My run
 <div  align="center">    
-	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)
+	<img src="[图片链接](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)" width = 400 />
 </div>
 
 <div  align="center">    
