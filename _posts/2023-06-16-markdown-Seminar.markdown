@@ -65,7 +65,7 @@ Known to drastically improve the convergence speed, curriculum sampling is widel
 
 
 ## 3.Model
-### 3.1.Overview
+### Overview
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/bb71524f-9e91-4c03-92ba-9e8048f844ed)
 
 The approach can be seen as a structured autoencoder: it takes an image as input, computes parameters with an encoder, and decodes them into explicit and interpretable factors that are composed to generate an image.
@@ -74,14 +74,14 @@ The image I is fed to convolutional encoder networks eθ which output parameters
 
 
 
-### 3.2.Shape deformation
+### 3.1.Shape deformation
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f7aa2641-1235-43ab-a934-f33ffc245ba4)
 
 The authors follow [9] and use the parametrization of AtlasNet [1] where different shapes are represented as deformation fields applied to the unit sphere. 
 They apply the deformation to an icosphere slightly stretched into an ellipsoid mesh E using a fixed anisotropic scaling. Because they found that using an ellipsoid instead of a raw icosphere could be very effective in encouraging the learning of objects aligned w.r.t. the canonical axes
 
-### 3.3.Texturing
+### 3.2.Texturing
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ea20c50a-b301-4017-9eeb-e8200b98f894)
 
@@ -89,14 +89,14 @@ Following the idea of CMR [10], the authors model textures as an image UV-mapped
 
 They provide a texture code ztx, a convolutional network tθ is used to produce an image tθ(ztx), which is UV-mapped onto the sphere using spherical coordinates to associate a 2D point to every vertex of the ellipsoid, and thus to each vertex of the shaped mesh.
 
-### 3.4.Affine transformation
+### 3.3.Affine transformation
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7ccdaee3-2a99-4553-b820-8a213ed2a612)
 
 The authors found it beneficial to explicitly model an anisotropic scaling of the objects. They predict K poses candidates, defined by rotations r1:K and translations t1:K, and associated probabilities p1:K.  Then they select the pose with highest probability, combine the scaling and the most likely 6D pose in a single affine transformation module 
 
 
-### 3.5.Rendering with background
+### 3.4.Rendering with background
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/413256d7-eafd-4d6e-9b03-89ea02dc1139)
 
