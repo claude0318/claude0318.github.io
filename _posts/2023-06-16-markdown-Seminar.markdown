@@ -195,7 +195,7 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/d3bffc9a-a050-41ea-ab97-f7f69911f953"  />
 </div>
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ebe3e72f-fa55-4645-8d5f-f7190ce2536b)
+
 
 It's a picture that I took in front of the building of TUM in downtown. 
 
