@@ -118,8 +118,9 @@ The goal of progressive conditioning is to encourage the model to share elements
 
 ### Alternate 3D and pose learning
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
+<figcaption class="caption">Previous Work</figcaption>
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/2e8d2aaf-2d9f-449c-b8d6-4113b1561956)
-
+<figcaption class="caption">Author's Method</figcaption>
 
 ### Training Loss
 #### 3D step
@@ -159,15 +160,7 @@ the P-step where the branches of the network predicting candidate poses and thei
 ## My run
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/1cb15f7a-94b6-406d-80b1-0668c47ffd09)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/b0ae280f-e341-4945-8513-a6fbcaa24df2)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/133be078-a445-4e00-99d1-579464a2efc9)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ce1cb850-043d-4360-ad64-3b66c632dc51)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/08fea47a-6953-41a4-89a5-d763573257d2)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/25ec1a0c-ca70-49e8-8f1d-e791a482da56)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/736fad9c-1e01-4e84-9e6c-f8fadb4fc704)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/0b7f4364-2451-47f6-8541-4c1d8d95d1f0)
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/39b7f28a-66b9-4ee4-86b1-ad4759ae3d0a)
+
 
 
 ## Conclusions
