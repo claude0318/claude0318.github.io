@@ -120,12 +120,16 @@ The goal of progressive conditioning is to encourage the model to share elements
 
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
-<center>Previous Work</center>
+<center>
+Previous Wor
+k</center>
 
 
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/19614a2c-e1aa-4722-8b3c-04f18726ad2a)
-<center>Author's Method</center>
+<center>
+Author's Method
+</center>
 
 
 
