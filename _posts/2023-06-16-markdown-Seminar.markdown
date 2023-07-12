@@ -76,52 +76,99 @@ The approach can be seen as a structured autoencoder: it takes an image as input
 
 The image I is fed to convolutional encoder networks eθ which output parameters eθ(I) = {zsh, ztx, a, zbg} used for the decoding part. In the following, we describe the decoding modules using these parameters to build the final image by generating a shape, adding texture, positioning it and rendering it over a background.
 
-#### 此处有图片
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/bb71524f-9e91-4c03-92ba-9e8048f844ed)
+
 ### 1.Shape deformation
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f7aa2641-1235-43ab-a934-f33ffc245ba4)
+
 The authors follow [9] and use the parametrization of AtlasNet [1] where different shapes are represented as deformation fields applied to the unit sphere. 
 
 They apply the deformation to an icosphere slightly stretched into an ellipsoid mesh E using a fixed anisotropic scaling. Because they found that using an ellipsoid instead of a raw icosphere could be very effective in encouraging the learning of objects aligned w.r.t. the canonical axes
 
 ### 2.Texturing
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ea20c50a-b301-4017-9eeb-e8200b98f894)
 
 Following the idea of CMR [10], the authors model textures as an image UV-mapped onto the mesh through the reference ellipsoid. 
 
 They provide a texture code ztx, a convolutional network tθ is used to produce an image tθ(ztx), which is UV-mapped onto the sphere using spherical coordinates to associate a 2D point to every vertex of the ellipsoid, and thus to each vertex of the shaped mesh.
 
 ### 3.Affine transformation
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7ccdaee3-2a99-4553-b820-8a213ed2a612)
+
 The authors found it beneficial to explicitly model an anisotropic scaling of the objects. They predict K poses candidates, defined by rotations r1:K and translations t1:K, and associated probabilities p1:K.  Then they select the pose with highest probability, combine the scaling and the most likely 6D pose in a single affine transformation module 
 
 
 ### 4.Rendering with background
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/413256d7-eafd-4d6e-9b03-89ea02dc1139)
 
 The final step of the process is to render the mesh over a background image. The background image bθ(zbg) is generated from a background code zbg by a convolutional network bθ.
 
 
 ## Learning Methods
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/0db2c3d4-46e1-4f4b-8028-ff8698d378e4)
+
 The authors propose to learn the structured autoencoder without any supervision, by synthesizing 2D images and minimizing a reconstruction loss. Due to the unconstrained nature of the problem, such an approach typically yields degenerate solution. While previous works leverage silhouettes and dataset-specific priors to mitigate this issue, the authors instead propose two unsupervised data-driven techniques, namely progressive conditioning (a training strategy) and neighbor reconstruction (a training loss).
 
 
 ### Progressive conditioning
 
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/d9a96e9a-ea39-496b-a885-24d393329501)
 
 The goal of progressive conditioning is to encourage the model to share elements (e.g., shape, texture, background) across instances to prevent degenerate solutions.They implement progressive conditioning by masking, stage-by-stage, a decreasing number of values of the latent code. All the experiments share the same 4-stage training strategy where the latent code dimension is increased at the beginning of each stage and the network is then trained until convergence.
 
-#### 此处有图片
+### Alternate 3D and pose learning
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/2e8d2aaf-2d9f-449c-b8d6-4113b1561956)
+
+
 ### Training Loss
-####3D step
+#### 3D step
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f1e8bd1c-c7f4-4b72-9f51-9c3597e0c559)
+
 the 3D-step where shape, texture and background branches of the network are updated by minimizing L3D using the pose associated to the highest probability
-#### 此处有图片
+##### Neighbor reconstruction
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/763f745d-9103-4d02-8a05-2c6d8a2298e0)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/af1f6f6d-218e-4501-9391-8750652ddd05)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/79cfdca6-f2ad-4292-8648-1fca5b27adf9)
 
 
-####P step
+##### Reconstruction losses
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/71193680-54af-4581-a02e-bfa66477fefd)
+
+##### regularization losses
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/14a0f375-9f77-451d-beaf-5229701bdcec)
+
+
+
+
+#### P step
+
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ab52a57a-c74f-46b3-a154-5762850d4e8d)
+
 the P-step where the branches of the network predicting candidate poses and their associated probabilities are updated by minimizing:
 
-#### 此处有图片
+
 ## Evaluation
-#### 此处有图片
+
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/4de39b37-1917-4794-8795-2da112bb7cf3)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/29ddde42-8547-4a80-9779-259e35096f71)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7f1189e0-e403-41bb-bd9b-e7dee39fe1ce)
+
 
 ## My run
-#### 此处有图片
+
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/1cb15f7a-94b6-406d-80b1-0668c47ffd09)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/b0ae280f-e341-4945-8513-a6fbcaa24df2)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/133be078-a445-4e00-99d1-579464a2efc9)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ce1cb850-043d-4360-ad64-3b66c632dc51)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/08fea47a-6953-41a4-89a5-d763573257d2)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/25ec1a0c-ca70-49e8-8f1d-e791a482da56)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/736fad9c-1e01-4e84-9e6c-f8fadb4fc704)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/0b7f4364-2451-47f6-8541-4c1d8d95d1f0)
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/39b7f28a-66b9-4ee4-86b1-ad4759ae3d0a)
+
 
 ## Conclusions
 
@@ -150,44 +197,6 @@ Reference:
 [10] Kanazawa, A., Tulsiani, S., Efros, A.A., Malik, J.: Learning Category-Specific Mesh Reconstruction from Image Collections. In: ECCV (2018) 2, 4, 6, 11, 12
 
 
-{% highlight raw %}
-# Heading
-## Heading
-### Heading
-#### Heading
-{% endhighlight %}
-
----
-
-## Lists
-
-### Ordered list
-
-1. Item 1
-2. A second item
-3. Number 3
-
-{% highlight raw %}
-1. Item 1
-2. A second item
-3. Number 3
-{% endhighlight %}
-
-### Unordered list
-
-* An item
-* Another item
-* Yet another item
-* And there's more...
-
-{% highlight raw %}
-* An item
-* Another item
-* Yet another item
-* And there's more...
-{% endhighlight %}
-
----
 
 ## Paragraph modifiers
 
