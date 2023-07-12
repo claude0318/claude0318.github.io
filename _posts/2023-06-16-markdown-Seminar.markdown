@@ -192,7 +192,7 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 
 ## My run
 <div  align="center">    
-	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2e"  />
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/d3bffc9a-a050-41ea-ab97-f7f69911f953"  />
 </div>
 
 
@@ -202,6 +202,8 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 
 
 As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
+![re01](https://github.com/claude0318/claude0318.github.io/assets/69024793/a8cf37dd-25b1-4c7e-a975-159a9942c667)
+![re05](https://github.com/claude0318/claude0318.github.io/assets/69024793/0c1841bd-9a80-4d8b-a65b-bbdfc168531e)
 
 ![psc](https://github.com/claude0318/claude0318.github.io/assets/69024793/d7bcc758-6bbf-4fba-8676-cbabd7d964f7)
 
