@@ -173,31 +173,33 @@ as it involves solving the pose estimation and shape reconstruction problems sim
 However, note that for the lamp category, the method predicts degenerate 3D shapes; the authors hypothesize this is due to their rotation invariance which makes the viewpoint estimation ambiguous.
 
 <div  align="center">    
-	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/4de39b37-1917-4794-8795-2da112bb7cf3)
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/4de39b37-1917-4794-8795-2da112bb7cf3" />
 </div>
+
 
 On Pascal3D+ Car, they achieve significantly better results than UCMR for Chamfer-L1 and Mask IoU, which they argue are less biased metrics than the standard 3D IoU computed on unaligned shapes (see supplementary). However, on CUB, the approach achieves reasonable results that are however slightly worse than the state of the art. They hypothesize this is linked to the pose regularization term encouraging the use of all viewpoints whereas these bird images clearly lack back views.
 
 <div  align="center">    
-	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/29ddde42-8547-4a80-9779-259e35096f71)
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/29ddde42-8547-4a80-9779-259e35096f71"  />
 </div>
 <div  align="center">    
-	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7f1189e0-e403-41bb-bd9b-e7dee39fe1ce)
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/7f1189e0-e403-41bb-bd9b-e7dee39fe1ce" />
 </div>
+
 
 The authors also analyze the influence of their neighbor reconstruction loss and progressive conditioning (PC) by running experiments without each component.When neighbor reconstruction loss is removed, they observe that the reconstruction seen from the predicted viewpoint is correct but it is either wrong for chairs and degraded for cars when seen from the other viewpoint. Indeed, the neighbor reconstruction explicitly enforces the unseen reconstructed parts to be consistent with other instances. When PC is removed, they observe degenerate reconstructions where the object seen from a different viewpoint is not realistic.
 
 
 ## My run
 <div  align="center">    
-	<img src="[图片链接](https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2)" width = 400 />
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/cb71bc6a-87e3-4c56-8655-4d3922bc0bf2e"  />
 </div>
-
 
 
 <div  align="center">    
-	![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/a4ed918c-905a-40de-a32a-12b7b26d249a)
+	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/a4ed918c-905a-40de-a32a-12b7b26d249a"  />
 </div>
+
 
 As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
 
