@@ -191,10 +191,13 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 
 
 ## My run
+
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/d3bffc9a-a050-41ea-ab97-f7f69911f953"  />
 </div>
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/ebe3e72f-fa55-4645-8d5f-f7190ce2536b)
 
+It's a picture that I took in front of the building of TUM in downtown. 
 
 <div  align="center">    
 	<img src="https://github.com/claude0318/claude0318.github.io/assets/69024793/a4ed918c-905a-40de-a32a-12b7b26d249a"  />
@@ -202,15 +205,16 @@ The authors also analyze the influence of their neighbor reconstruction loss and
 
 
 As you can see, although the input size of the pictures are not the same, but they become the same resolution during the shape deformation period like I mentioned before.
+
+
 ![re01](https://github.com/claude0318/claude0318.github.io/assets/69024793/a8cf37dd-25b1-4c7e-a975-159a9942c667)
 ![re05](https://github.com/claude0318/claude0318.github.io/assets/69024793/0c1841bd-9a80-4d8b-a65b-bbdfc168531e)
-
 ![psc](https://github.com/claude0318/claude0318.github.io/assets/69024793/d7bcc758-6bbf-4fba-8676-cbabd7d964f7)
-
+Although the final result could not tell that the reconstruction of our input is a porsche, we could still easily find that it's quite different from the SUV. Considering that the input image only has the back side of a vehicle, the result is good enough.
 
 ## Conclusions
 
-
+It's the first unsupervised SVR method in the world, although the result might looks very similar to the training set as they will share their texture with each other, the final result is convincing enough when the inputs have all side views. At least it makes SVR without any supervision come true. Of course, it sends on the shoulder of other giants, but it's always harder to get to 1 from 0 than going further from 1. I believe that it will lead a new explosion of studying in unsupervised SVR and I hope I could join them in the future.
 
 Reference:
 
