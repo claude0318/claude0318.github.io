@@ -34,9 +34,6 @@ In this paper, the authors present UNICORN, a framework leveraging UNsupervised 
 
 
 
-{% highlight html %}
-This note **demonstrates** some of what [Markdown][some/link] is *capable of doing*.
-{% endhighlight %}
 ## Related works
 ### Mesh-based differentiable rendering
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/f541f889-ec22-4f18-b6f2-3fbd8aa3e8b5)
@@ -120,16 +117,11 @@ The goal of progressive conditioning is to encourage the model to share elements
 
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
-<center>
-Previous Wor
-k</center>
 
 
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/19614a2c-e1aa-4722-8b3c-04f18726ad2a)
-<center>
-Author's Method
-</center>
+
 
 
 
@@ -141,7 +133,9 @@ Author's Method
 the 3D-step where shape, texture and background branches of the network are updated by minimizing L3D using the pose associated to the highest probability
 ##### Neighbor reconstruction
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/763f745d-9103-4d02-8a05-2c6d8a2298e0)
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/af1f6f6d-218e-4501-9391-8750652ddd05)
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/79cfdca6-f2ad-4292-8648-1fca5b27adf9)
 
 
@@ -164,8 +158,11 @@ the P-step where the branches of the network predicting candidate poses and thei
 ## Evaluation
 
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/564cf84b-44b2-4bbf-8af3-e66b7ea2b613)
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/4de39b37-1917-4794-8795-2da112bb7cf3)
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/29ddde42-8547-4a80-9779-259e35096f71)
+
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/7f1189e0-e403-41bb-bd9b-e7dee39fe1ce)
 
 
