@@ -117,10 +117,18 @@ The authors propose to learn the structured autoencoder without any supervision,
 The goal of progressive conditioning is to encourage the model to share elements (e.g., shape, texture, background) across instances to prevent degenerate solutions.They implement progressive conditioning by masking, stage-by-stage, a decreasing number of values of the latent code. All the experiments share the same 4-stage training strategy where the latent code dimension is increased at the beginning of each stage and the network is then trained until convergence.
 
 ### Alternate 3D and pose learning
+
+{% highlight raw %}
 ![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/663d9a9d-7c7a-4ced-a334-3234930a9ac6)
 <figcaption class="caption">Previous Work</figcaption>
-![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/2e8d2aaf-2d9f-449c-b8d6-4113b1561956)
+{% endhighlight %}
+
+{% highlight raw %}
+![image](https://github.com/claude0318/claude0318.github.io/assets/69024793/19614a2c-e1aa-4722-8b3c-04f18726ad2a)
 <figcaption class="caption">Author's Method</figcaption>
+{% endhighlight %}
+
+
 
 ### Training Loss
 #### 3D step
