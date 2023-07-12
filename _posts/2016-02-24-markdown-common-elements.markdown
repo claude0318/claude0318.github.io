@@ -1,23 +1,26 @@
 ---
-title: "Markdown Common Elements"
+title: "Seminar-Share With Thy Neighbor"
 layout: post
-date: 2016-02-24 22:44
+date: 2023-06-16
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- markdown
-- elements
+- Single View Reconstruction
+- 3D Computer Vision
+- Unsupervised learning
 star: true
 category: blog
-author: johndoe
-description: Markdown summary with different options
+author: Zihao Cao
+description: Introduction of the first unsupervised SVR method in the world
 ---
 
-## Basic formatting
+# Background
 
-This note **demonstrates** some of what [Markdown][1] is *capable of doing*.
+It's quite amazing that human eyes and brains can work together and directly understand the 3D structure of the objects that we see in 2D images. However, it's a hard task for the computer to do so ———— reconstructuring the object from single view. Recent advancements in deep learning methods have dramatically improved results in SVR(single view reconstruction), however, the best methods still require costly supervision at training time.
 
-And that's how to do it.
+Despite efforts to remove the constraints, the works with the least supervision still rely on two signals limiting their applicability: (i) silhouettes and (ii) strong assumptions such as symmetries, known template shapes, or the absence of background. Although crucial to achieve reasonable results, priors like silhouettes and symmetry can also harm the reconstruction quality: silhouette annotations are often coarse and small symmetry prediction errors can yield unrealistic reconstructions.
+
+Then it comes to the thinking: is there an unsupervised learning method for SVR? Before this paper, the answer was no. In this paper, the authors present UNICORN, a framework leveraging UNsupervised cross-Instance COnsistency for 3D ReconstructioN. It is the most unsupervised approach to single-view reconstruction and their main contributions are: 1) the most unsupervised SVR system; 2) two data-driven techniques to enforce cross-instance consistency
 
 {% highlight html %}
 This note **demonstrates** some of what [Markdown][some/link] is *capable of doing*.
